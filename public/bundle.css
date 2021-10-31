@@ -1,1 +1,16 @@
-.jumbotron{background:#532f8c;color:#fff;padding-bottom:80px}.jumbotron .btn-primary{background:#845ac7;border-color:#845ac7}.jumbotron .btn-primary:hover{background:#7646c1}.jumbotron p{color:#d9ccee;max-width:75%;margin:1em auto 2em}.navbar+.jumbotron{margin-top:-20px}.jumbotron .lang-logo{display:block;background:#b01302;border-radius:50%;overflow:hidden;width:100px;height:100px;margin:auto;border:2px solid #fff}.jumbotron .lang-logo img{max-width:100%}
+:root {
+  --mdc-theme-primary: #03A9F4;
+  --mdc-theme-secondary: #CDDC39;
+  --mdc-theme-background: #FFFFFF;
+  --mdc-theme-surface: #FFFFFF;
+  --mdc-theme-on-primary: #FFFFFF;
+  --mdc-theme-on-secondary: #FFFFFF;
+  --mdc-theme-on-surface: #212121;
+  --mdc-theme-primary-bg: #B3E5FC;
+  --mdc-theme-secondary-bg: #B3E5FC;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
