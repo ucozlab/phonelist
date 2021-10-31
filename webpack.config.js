@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function tryResolve_(url, sourceFilename) {
   // Put require.resolve in a try/catch to avoid node-sass failing with cryptic libsass errors
@@ -28,14 +29,21 @@ function materialImporter(url, prev) {
 }
 
 module.exports = [{
-  entry: ['./client/styles/app.scss', './client/scripts/app.js'],
+  entry: ['./client/styles/app.scss', './client/App.js'],
   output: {
     // This is necessary for webpack to compile
     // But we never use style-bundle.js
     filename: 'bundle.js',
-    publicPath: '/public/',
+    // publicPath: '/public/',
     path: path.resolve(__dirname, 'public'), //__dirname + '/public/',
   },
+  // plugins: [new HtmlWebpackPlugin({
+  //   title: 'Phone list App made with love on React, SCSS, NodeJS, MongoDB and Heroku free hosting',
+  //   meta: {
+  //     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+  //   },
+  //   template: path.resolve(__dirname, 'public/index.html')
+  // })],
   module: {
     rules: [
       {
@@ -76,10 +84,21 @@ module.exports = [{
         ],
       },
       {
+        test: /\.html/,
+        use: [
+          {
+            loader: 'file-loader?name=[name].[ext]',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env']
+          presets: ["@babel/preset-react"]
         }
       }
     ],
