@@ -3,18 +3,14 @@ import {connect} from "react-redux";
 
 import {Paper} from "@material-ui/core";
 import Contact from "./Contact";
-import {postContacts} from "../../api/contacts-api";
+import {getContactsList} from "../../actions/contactFunctions";
 
 
 const ContactList = (props) => {
-  const {contactsList} = props;
+  const {contactsList, getContactsList} = props;
 
   useEffect(() => {
-    const getList = async () => {
-      const list = await postContacts();
-      console.log("list", list);
-    }
-    getList();
+    getContactsList();
   }, [])
 
   return (
@@ -31,4 +27,8 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(ContactList)
+const mapDispatchToProps = {
+  getContactsList
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList)
