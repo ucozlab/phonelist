@@ -1,19 +1,12 @@
-const express = require('express')
-const path = require('path')
+process.on('uncaughtException', err => {
+  console.log('UNCAUGHT EXCEPTION!!! shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
+const app = require('./server/app');
 const PORT = process.env.PORT || 5000;
-const contacts = require('./server/mockContacts');
 
-const API_BASE_URL = "/api";
-
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  // .set('views', path.join(__dirname, 'server/views'))
-  // .set('view engine', 'ejs')
-  // .get('/', (req, res) => res.render('pages/index'))
-  .post(API_BASE_URL + '/contacts', (req, res) => {
-    return res.send(contacts)
-  })
-  .get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => {
+  console.log(`Application is running on port ${PORT}`);
+});
