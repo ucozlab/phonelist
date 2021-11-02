@@ -1,26 +1,29 @@
 const { MongoClient } = require("mongodb");
 // Connection URI
-const uri = "mongodb+srv://sample-hostname:27017/?maxPoolSize=20&w=majority";
+const connectionString = process.env.DATABASE;
 
-// Create a new MongoClient
-const client = new MongoClient(uri);
+const client = new MongoClient(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-let db;
-//
-async function run() {
-  try {
-    // Connect the client to the server
-    await client.connect();
-    // Establish and verify connection
-    db = await client.db("PhoneDB").command({ ping: 1 });
-    console.log("Connected successfully to server");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
+let dbConnection;
 
 module.exports = {
-  db
-}
+  connectToServer: function (callback) {
+    client.connect(function (err, client) {
+      if (err || !client) {
+        return callback(err);
+      }
+
+      dbConnection = client.db("PhoneDB");
+      console.log("Successfully connected to MongoDB.");
+
+      return callback();
+    });
+  },
+
+  getDb: function () {
+    return dbConnection;
+  },
+};

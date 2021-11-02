@@ -15,7 +15,9 @@ const ContactList = (props) => {
 
   return (
     <Paper className="contacts">
-      {contactsList.map(contact => <Contact key={contact.id} contact={contact}/>)}
+      {contactsList.map((contact, contactIndex) => {
+        return <Contact key={contact.id || contact._id || "contact" + contactIndex} contact={contact}/>
+      })}
     </Paper>
   );
 }

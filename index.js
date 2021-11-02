@@ -4,9 +4,17 @@ process.on('uncaughtException', err => {
   process.exit(1);
 });
 
+const dotenv = require('dotenv');
+dotenv.config({
+  path: './.env'
+});
+
 const app = require('./server/app');
+const mongoClient = require('./server/db');
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Application is running on port ${PORT}`);
-});
+mongoClient.connectToServer(() => {
+  app.listen(PORT, () => {
+    console.log(`Application is running on port ${PORT}`);
+  });
+})

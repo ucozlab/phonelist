@@ -1,13 +1,23 @@
 const express = require('express');
 const contactsRouter = express.Router();
-const contactsMocked = require("../mockContacts");
-// const {db} = require("../db");
+// const contactsMocked = require("../mockContacts");
+const mongoClient = require("../db");
 
 contactsRouter
   .route('/contacts')
   .post((req, res) => {
-    // console.log("db", db);
-    return res.send(contactsMocked)
+    const dbConnect = mongoClient.getDb();
+    dbConnect
+      .collection("contacts")
+      .find({}).limit(50)
+      .toArray(function (err, result) {
+        if (err) {
+          res.status(400).send("Error fetching listings!");
+        } else {
+          res.json(result);
+        }
+      });
+    // return res.send(contactsCollection)
   });
 
 
@@ -17,9 +27,9 @@ contactsRouter
 //   .patch(userController.updateUser)
 //   .delete(userController.deleteUser);
 
-module.exports = contactsRouter;
-
 // app.post(API_BASE_URL + '/contacts', (req, res) => {
 //   console.log("db", db);
 //   return res.send(contactsRoutes)
 // })
+
+module.exports = contactsRouter;
