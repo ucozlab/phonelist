@@ -10,7 +10,8 @@
     "start": "node index.js",
     "front-dev": "webpack --mode=development --watch",
     "front-prod": "webpack --mode=production",
-    "production": "npm run front-prod & node index.js",
+    "production": "node index.js",
+    "heroku-postbuild": "npm run front-prod",
     "test": "node test.js"
   },
   "dependencies": {
