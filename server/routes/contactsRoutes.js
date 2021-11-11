@@ -20,6 +20,26 @@ contactsRouter
     // return res.send(contactsCollection)
   });
 
+contactsRouter
+  .route('/update-contact')
+  .post((req, res) => {
+    const dbConnect = mongoClient.getDb();
+
+    const contactInfo = req.body;
+
+    dbConnect
+      .collection("contacts")
+      .insertOne(contactInfo, function (err, result) {
+        if (err) {
+          res.status(400).send("Error inserting matches!");
+        } else {
+          console.log(`Added a new contact with id ${result.insertedId}`);
+          res.status(204).send();
+        }
+      });
+    // return res.send(contactsCollection)
+  });
+
 
 // router
 //   .route('/:id')

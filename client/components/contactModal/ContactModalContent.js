@@ -4,11 +4,18 @@ import {connect} from "react-redux";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
+import TextField from "@mui/material/TextField";
 
-import {setContactModalOpened} from "../../actions/generalFunctions";
+import {setContactModalValue} from "../../actions/generalFunctions";
+import ContactModalSubmitButton from "./ContactModalSubmitButton";
 
 const ContactModalContent = (props) => {
-  const {editActiveContact} = props;
+  const {contactModalValues, setContactModalValue} = props;
+
+  const inputChange = (event) => {
+    setContactModalValue(event.target.name, event.target.value)
+  }
+
   return (
     <Fragment>
       <Card className="modal-top">
@@ -22,24 +29,30 @@ const ContactModalContent = (props) => {
         </CardContent>
       </Card>
       <div className="modal-content">
-        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-        </Typography>
+        {["first_name", "last_name", "phone", "image", "countryCode", "email"].map(inputKey => {
+          return <TextField key={inputKey}
+                            name={inputKey}
+                            label={inputKey}
+                            value={contactModalValues[inputKey]}
+                            variant="outlined"
+                            onChange={inputChange}/>
+        })}
+        <ContactModalSubmitButton/>
       </div>
     </Fragment>
   );
 }
 
 const mapStateToProps = (store) => {
-  const {contactModalOpened, editActiveContact} = store.generalState;
+  const {contactModalOpened, contactModalValues} = store.generalState;
   return {
     contactModalOpened,
-    editActiveContact,
+    contactModalValues,
   }
 }
 
 const mapDispatchToProps = {
-  setContactModalOpened
+  setContactModalValue,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactModalContent)

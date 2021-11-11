@@ -23,7 +23,7 @@ const ContactModal = (props) => {
         timeout: 300,
       }}
     >
-      <Fade in={open}>
+      <Fade in={contactModalOpened}>
         <Paper className="modal" elevation={2}>
           <ContactModalContent/>
         </Paper>

@@ -35,8 +35,8 @@ export const postContactSearch = (page = 0, pageSize = 500, sortBy = {}, filterB
       return response.data
     });
 };
-export const postAddContact = (contactId) => {
-  return AxiosInstance.post("/user/add-contact", {contactId})
+export const postAddContact = (contactData) => {
+  return AxiosInstance.post("/update-contact", contactData)
     .then((response) => {
       console.log("postAddContact success:", response);
       return response.data
