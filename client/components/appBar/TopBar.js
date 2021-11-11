@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-import MenuIcon from "@material-ui/icons/Menu";
-import {Button, Typography, Toolbar, AppBar, IconButton} from "@material-ui/core";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const TopBar = () => {
   return (
@@ -18,7 +21,7 @@ const TopBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
+          Contacts
         </Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>

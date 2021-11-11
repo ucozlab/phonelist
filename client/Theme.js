@@ -1,15 +1,15 @@
 import React from 'react';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
       // Purple and green play nicely together.
-      main: "#03A9F4",
+      main: "#CDDC39",
     },
     secondary: {
       // This is green.A700 as hex.
-      main: '#CDDC39',
+      main: '#03A9F4',
     },
   },
 });

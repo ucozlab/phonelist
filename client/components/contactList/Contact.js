@@ -1,8 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
 
-import ImageIcon from "@material-ui/icons/Image";
-import {ListItem, ListItemAvatar, Avatar, ListItemText} from "@material-ui/core";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import ImageIcon from '@mui/icons-material/Image';
+
 import {postUpdateContact} from "../../actions/contactFunctions";
 
 const Contact = (props) => {
