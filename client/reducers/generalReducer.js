@@ -4,12 +4,12 @@ const contactsState = {
   showLoader: false,
   contactModalOpened: false,
   contactModalValues: {
-    first_name: "",
-    last_name: "",
-    phone: "",
-    image: "",
-    countryCode: "",
-    email: ""
+    "first_name": "",
+    "last_name": "",
+    "phone": "",
+    "image": "",
+    "countryCode": "",
+    "email": ""
   }
 };
 

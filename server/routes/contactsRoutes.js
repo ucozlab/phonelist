@@ -27,14 +27,16 @@ contactsRouter
 
     const contactInfo = req.body;
 
+    console.log("contactInfo to apply", contactInfo);
+
     dbConnect
       .collection("contacts")
       .insertOne(contactInfo, function (err, result) {
         if (err) {
-          res.status(400).send("Error inserting matches!");
+          res.status(400).send({error: "Error inserting matches!"});
         } else {
-          console.log(`Added a new contact with id ${result.insertedId}`);
-          res.status(204).send();
+          console.log(`Added a new contact with result ${result}`);
+          res.status(204).send(result.insertedId);
         }
       });
     // return res.send(contactsCollection)
