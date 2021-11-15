@@ -2,8 +2,8 @@ import axios from "axios";
 import {API_BASE_URL} from "../../config";
 
 const headers = {
-  "accept": "text/plain",
-  "Content-Type": "application/json-patch+json"
+  // "accept": "text/plain",
+  "Content-Type": "application/json"
 };
 
 const AxiosInstance = axios.create({
@@ -69,19 +69,20 @@ export const apiResponseError = response => {
 export const apiGet = async url => {
   try {
     const response = await AxiosInstance.get(url);
-    return {data: {...response.data}, error: apiResponseError(response)};
+    console.log(`apiGet ${url} response`, response);
+    return response.data
   } catch (error) {
     return {error: apiResponseError(error)};
   }
 };
 
 export const apiPost = async (url, data) => {
-  console.log("url to post", url);
-  console.log("data to post", data);
+  // console.log("url to post", url);
+  // console.log("data to post", data);
   try {
     const response = await AxiosInstance.post(url, data);
-    console.log("response1", response);
-    return {data: {...response.data}, error: apiResponseError(response)};
+    console.log(`apiPost ${url} response`, response.data);
+    return response.data
   } catch (error) {
     console.log("response1 error", error);
     return {error: apiResponseError(error)};

@@ -1,57 +1,20 @@
 const express = require('express');
 const contactsRouter = express.Router();
-// const contactsMocked = require("../mockContacts");
-const mongoClient = require("../db");
+const {CONTACT_ROUTES} = require("../../config");
+const {getContacts, addContact} = require("./contactsApi");
 
 contactsRouter
-  .route('/contacts')
-  .post((req, res) => {
-    const dbConnect = mongoClient.getDb();
-    dbConnect
-      .collection("contacts")
-      .find({}).limit(50)
-      .toArray(function (err, result) {
-        if (err) {
-          res.status(400).send("Error fetching listings!");
-        } else {
-          res.json(result);
-        }
-      });
-    // return res.send(contactsCollection)
-  });
+  .route(CONTACT_ROUTES.getContacts)
+  .post(getContacts);
 
 contactsRouter
-  .route('/update-contact')
-  .post((req, res) => {
-    const dbConnect = mongoClient.getDb();
-
-    const contactInfo = req.body;
-
-    console.log("contactInfo to apply", contactInfo);
-
-    dbConnect
-      .collection("contacts")
-      .insertOne(contactInfo, function (err, result) {
-        if (err) {
-          res.status(400).send({error: "Error inserting matches!"});
-        } else {
-          console.log(`Added a new contact with result ${result}`);
-          res.status(204).send(result.insertedId);
-        }
-      });
-    // return res.send(contactsCollection)
-  });
-
+  .route(CONTACT_ROUTES.addContact)
+  .post(addContact);
 
 // router
 //   .route('/:id')
 //   .get(userController.getUser)
 //   .patch(userController.updateUser)
 //   .delete(userController.deleteUser);
-
-// app.post(API_BASE_URL + '/contacts', (req, res) => {
-//   console.log("db", db);
-//   return res.send(contactsRoutes)
-// })
 
 module.exports = contactsRouter;

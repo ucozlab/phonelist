@@ -1,60 +1,24 @@
-import AxiosInstance from "./axiosInstance";
+import {apiPost} from "./axiosInstance";
+import {CONTACT_ROUTES} from "../../config";
 
 export const postContacts = (page = 0, pageSize = 500, sortBy = {}, filterBy = {}, params = {}) => {
-  return AxiosInstance.post("/contacts", {
+  return apiPost(CONTACT_ROUTES.getContacts, {
     page,
     pageSize,
     sortBy,
     filterBy,
     params
   })
-    .then((response) => {
-      console.log("postContacts success:", response);
-      return response.data
-    })
-    .catch((response) => {
-      console.log("postContacts error:", response);
-      return response.data
-    });
 };
 
-export const postContactSearch = (page = 0, pageSize = 500, sortBy = {}, filterBy = {}, params = {}) => {
-  return AxiosInstance.post("/user/search", {
-    page,
-    pageSize,
-    sortBy,
-    filterBy,
-    params
-  })
-    .then((response) => {
-      console.log("postContactSearch success:", response);
-      return response.data
-    })
-    .catch((response) => {
-      console.log("postContactSearch error:", response);
-      return response.data
-    });
-};
-export const postAddContact = (contactData) => {
-  return AxiosInstance.post("/update-contact", contactData)
-    .then((response) => {
-      console.log("postAddContact success:", response);
-      return response.data
-    })
-    .catch((response) => {
-      console.log("postAddContact error:", response);
-      return response.data
-    });
+export const postAddContact = async (contactData) => {
+  return apiPost(CONTACT_ROUTES.addContact, contactData)
 };
 
-export const postDeleteContact = (contactId) => {
-  return AxiosInstance.post("/user/remove-contact", {contactId})
-    .then((response) => {
-      console.log("postDeleteContact success:", response);
-      return response.data
-    })
-    .catch((response) => {
-      console.log("postDeleteContact error:", response);
-      return response.data
-    });
+export const postUpdateContact = async (contactData) => {
+  return apiPost(CONTACT_ROUTES.updateContact, contactData)
+};
+
+export const postDeleteContact = async (contactData) => {
+  return apiPost(CONTACT_ROUTES.deleteContact, contactData)
 };

@@ -1,16 +1,19 @@
 import * as types from "../actions/actionTypes";
 
+export const clearContactValues = {
+  "_id": "",
+  "first_name": "",
+  "last_name": "",
+  "phone": "",
+  "image": "",
+  "countryCode": "",
+  "email": ""
+}
+
 const contactsState = {
   showLoader: false,
   contactModalOpened: false,
-  contactModalValues: {
-    "first_name": "",
-    "last_name": "",
-    "phone": "",
-    "image": "",
-    "countryCode": "",
-    "email": ""
-  }
+  contactModalValues: clearContactValues
 };
 
 export default function (state = contactsState, action) {

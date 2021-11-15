@@ -5,12 +5,13 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-import {setContactModalValue} from "../../actions/generalFunctions";
+import {setContactModalOpened, setContactModalValue} from "../../actions/generalFunctions";
 import ContactModalSubmitButton from "./ContactModalSubmitButton";
 
 const ContactModalContent = (props) => {
-  const {contactModalValues, setContactModalValue} = props;
+  const {contactModalValues, setContactModalValue, setContactModalOpened} = props;
 
   const inputChange = (event) => {
     setContactModalValue(event.target.name, event.target.value)
@@ -21,7 +22,7 @@ const ContactModalContent = (props) => {
       <Card className="modal-top">
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" className="modal-top__text">
-            Add New Contact
+            {contactModalValues._id ? "Update New Contact" : "Add New Contact"}
           </Typography>
           <Typography variant="body2" className="modal-top__text">
             Please fill in all required fields to add a contact
@@ -29,15 +30,23 @@ const ContactModalContent = (props) => {
         </CardContent>
       </Card>
       <div className="modal-content">
-        {["first_name", "last_name", "phone", "image", "countryCode", "email"].map(inputKey => {
-          return <TextField key={inputKey}
-                            name={inputKey}
-                            label={inputKey}
-                            value={contactModalValues[inputKey]}
-                            variant="outlined"
-                            onChange={inputChange}/>
-        })}
-        <ContactModalSubmitButton/>
+        <ui className="modal-content__list">
+          {["first_name", "last_name", "phone", "image", "countryCode", "email"].map(inputKey => {
+            return (
+              <li className="modal-content__list-item" key={inputKey}>
+                <TextField name={inputKey}
+                           label={inputKey}
+                           value={contactModalValues[inputKey]}
+                           variant="standard"
+                           onChange={inputChange}/>
+              </li>
+            )
+          })}
+        </ui>
+        <div className="modal-content__buttons">
+          <Button variant="outlined" onClick={() => setContactModalOpened(false)}>Cancel</Button>
+          <ContactModalSubmitButton/>
+        </div>
       </div>
     </Fragment>
   );
@@ -52,6 +61,7 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = {
+  setContactModalOpened,
   setContactModalValue,
 };
 

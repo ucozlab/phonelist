@@ -6,13 +6,13 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import ImageIcon from '@mui/icons-material/Image';
+import ContactEditButton from "./ContactEditButton";
 
-import {postUpdateContact} from "../../actions/contactFunctions";
 
 const Contact = (props) => {
-  const {contact, postUpdateContact} = props;
+  const {contact} = props;
   return (
-    <ListItem onClick={() => postUpdateContact(contact)}>
+    <ListItem secondaryAction={<ContactEditButton contact={contact}/>}>
       <ListItemAvatar>
         <Avatar style={contact.image ? {
           backgroundImage: `url(${contact.image})`,
@@ -33,7 +33,6 @@ const mapStateToProps = () => {
 }
 
 const mapDispatchToProps = {
-  postUpdateContact
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contact)

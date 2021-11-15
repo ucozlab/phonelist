@@ -5,16 +5,18 @@ import Button from "@mui/material/Button";
 
 import {setContactModalOpened, setShowLoader} from "../../actions/generalFunctions";
 import {postAddContact} from "../../api/contacts-api";
+import {getContactsList} from "../../actions/contactFunctions";
 
 const ContactModalSubmitButton = (props) => {
-  const {contactModalValues, setContactModalOpened, setShowLoader} = props;
+  const {contactModalValues, setContactModalOpened, setShowLoader, getContactsList} = props;
 
   const submitForm = async () => {
     setContactModalOpened(false);
     setShowLoader(true);
-    console.log("contactModalValues", contactModalValues);
-    const response = postAddContact(contactModalValues);
-    console.log("response", response);
+    const response = await postAddContact(contactModalValues);
+    if (response.acknowledged && response.insertedId) {
+      await getContactsList(); // update contacts list
+    }
     setShowLoader(false);
   }
 
@@ -33,6 +35,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = {
   setContactModalOpened,
   setShowLoader,
+  getContactsList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactModalSubmitButton)
