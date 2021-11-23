@@ -1,5 +1,7 @@
 # Phonelist App
 
+check live on https://phonelist-app.herokuapp.com/
+
 Phone list App made with love, patience, React, Redux, Redux-Saga, SCSS, NodeJS, MongoDB, Material UI and Heroku free hosting
 
 ## Running Locally
