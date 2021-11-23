@@ -1,4 +1,5 @@
 // const contactsMocked = require("../mockContacts");
+const {ObjectId} = require('mongodb');
 const mongoClient = require("../db");
 
 const getContacts = (req, res) => {
@@ -38,23 +39,46 @@ const addContact = (req, res) => {
 const updateContact = (req, res) => {
   const dbConnect = mongoClient.getDb();
 
-  const listingQuery = { _id: req.body._id };
+  const listingQuery = { "_id": ObjectId(req.body._id) };
   const updates = {
-    $inc: {
-      likes: 1
-    }
+    $set: {
+      "first_name": req.body.first_name,
+      "last_name": req.body.last_name,
+      "phone": req.body.phone,
+      "image": req.body.image,
+      "countryCode": req.body.countryCode,
+      "email": req.body.email
+    },
   };
 
   const contactInfo = {...req.body, last_modified: new Date()};
-  console.log("contactInfo to update", contactInfo);
+  // console.log("contactInfo to update", contactInfo);
 
   dbConnect
     .collection("contacts")
     .updateOne(listingQuery, updates, (err, _result) => {
       if (err) {
-        res.status(400).send(`Error updating likes on listing with id ${listingQuery.id}!`);
+        res.status(400).send(`Error updating contact on listing with id ${listingQuery.id}!`);
       } else {
         console.log("1 document updated");
+        res.status(200).send({success: true});
+      }
+    });
+  return null
+}
+
+const deleteContact = (req, res) => {
+  const dbConnect = mongoClient.getDb();
+  const listingQuery = { "_id": ObjectId(req.body._id) };
+
+  // console.log("listingQuery", listingQuery);
+  dbConnect
+    .collection("contacts")
+    .deleteOne(listingQuery, (err, _result) => {
+      if (err) {
+        res.status(400).send(`Error deleting contact on listing with id ${listingQuery.id}!`);
+      } else {
+        console.log("1 document deleted");
         res.status(200).send({success: true});
       }
     });
@@ -64,4 +88,6 @@ const updateContact = (req, res) => {
 module.exports = {
   getContacts,
   addContact,
+  updateContact,
+  deleteContact,
 };

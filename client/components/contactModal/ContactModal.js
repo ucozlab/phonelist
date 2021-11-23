@@ -33,7 +33,7 @@ const ContactModal = (props) => {
 }
 
 const mapStateToProps = (store) => {
-  const {contactModalOpened} = store.generalState;
+  const {contactModalOpened} = store.contactModalState;
   return {
     contactModalOpened
   }

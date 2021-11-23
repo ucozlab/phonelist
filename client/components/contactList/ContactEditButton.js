@@ -21,15 +21,9 @@ const ContactEditButton = (props) => {
   );
 }
 
-const mapStateToProps = () => {
-  return {
-
-  }
-}
-
 const mapDispatchToProps = {
   setContactModalOpened,
   setActiveContact
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactEditButton)
+export default connect(null, mapDispatchToProps)(ContactEditButton)

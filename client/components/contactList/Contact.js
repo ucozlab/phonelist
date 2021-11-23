@@ -6,18 +6,26 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import ImageIcon from '@mui/icons-material/Image';
-import ContactEditButton from "./ContactEditButton";
 
+import ContactEditButton from "./ContactEditButton";
+import ContactDeleteButton from "./ContactDeleteButton";
 
 const Contact = (props) => {
   const {contact} = props;
+
+  const avatarStyle = contact.image ? {
+    backgroundImage: `url(${contact.image})`,
+    backgroundSize: 'cover',
+  } : {};
+
   return (
-    <ListItem secondaryAction={<ContactEditButton contact={contact}/>}>
+    <ListItem className="contact"
+              secondaryAction={[
+                <ContactEditButton key={"edit"} contact={contact}/>,
+                <ContactDeleteButton key={"delete"} contact={contact}/>
+              ]}>
       <ListItemAvatar>
-        <Avatar style={contact.image ? {
-          backgroundImage: `url(${contact.image})`,
-          backgroundSize: 'cover',
-        } : {}}>
+        <Avatar style={avatarStyle}>
           {contact.image ? <span/> : <ImageIcon />}
         </Avatar>
       </ListItemAvatar>
@@ -26,13 +34,4 @@ const Contact = (props) => {
   );
 }
 
-const mapStateToProps = () => {
-  return {
-
-  }
-}
-
-const mapDispatchToProps = {
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Contact)
+export default connect()(Contact)

@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+
 import Contact from "./Contact";
-import {getContactsList} from "../../actions/contactFunctions";
+import {getContactsList} from "../../actions/contactModalFunctions";
 
 const ContactList = (props) => {
   const {contactsList, getContactsList} = props;

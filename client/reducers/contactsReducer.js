@@ -11,7 +11,6 @@ export default function (state = contactsState, action) {
       return Object.assign({}, state, {
         contactsList: [...action.payload.contactsList]
       });
-    case types.GET_CONTACTS_LIST:
     case types.SET_CONTACTS_SEARCH_INPUT_TEXT:
       return Object.assign({}, state, {
         ...action.payload

@@ -1,6 +1,6 @@
 # Phonelist App
 
-Phone list App made with love, patience, React, Redux, Redux-Saga, SCSS, NodeJS, MongoDB and Heroku free hosting
+Phone list App made with love, patience, React, Redux, Redux-Saga, SCSS, NodeJS, MongoDB, Material UI and Heroku free hosting
 
 ## Running Locally
 

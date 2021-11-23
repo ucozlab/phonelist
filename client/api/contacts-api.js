@@ -15,10 +15,10 @@ export const postAddContact = async (contactData) => {
   return apiPost(CONTACT_ROUTES.addContact, contactData)
 };
 
-export const postUpdateContact = async (contactData) => {
+export const postEditContact = async (contactData) => {
   return apiPost(CONTACT_ROUTES.updateContact, contactData)
 };
 
-export const postDeleteContact = async (contactData) => {
+export const postRemoveContact = async (contactData) => {
   return apiPost(CONTACT_ROUTES.deleteContact, contactData)
 };

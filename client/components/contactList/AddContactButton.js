@@ -5,7 +5,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
 import {setActiveContact, setContactModalOpened} from "../../actions/generalFunctions";
-import {clearContactValues} from "../../reducers/generalReducer";
+import {clearContactValues} from "../../reducers/contactModalReducer";
 
 const AddContactButton = (props) => {
   const {setContactModalOpened, setActiveContact} = props;

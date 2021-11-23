@@ -3,21 +3,19 @@ import {connect} from "react-redux";
 
 import Button from "@mui/material/Button";
 
-import {setContactModalOpened, setShowLoader} from "../../actions/generalFunctions";
-import {postAddContact} from "../../api/contacts-api";
-import {getContactsList} from "../../actions/contactFunctions";
+import {postCreateContact, postUpdateContact} from "../../actions/contactModalFunctions";
 
 const ContactModalSubmitButton = (props) => {
-  const {contactModalValues, setContactModalOpened, setShowLoader, getContactsList} = props;
+  const {contactModalValues, postCreateContact, postUpdateContact} = props;
 
-  const submitForm = async () => {
-    setContactModalOpened(false);
-    setShowLoader(true);
-    const response = await postAddContact(contactModalValues);
-    if (response.acknowledged && response.insertedId) {
-      await getContactsList(); // update contacts list
+  const submitForm = () => {
+    if (contactModalValues._id) {
+      postUpdateContact(contactModalValues);
+    } else {
+      let newContact = Object.assign({}, contactModalValues);
+      delete newContact._id; // we should not pass it on the backend as it is empty
+      postCreateContact(newContact);
     }
-    setShowLoader(false);
   }
 
   return (
@@ -26,16 +24,15 @@ const ContactModalSubmitButton = (props) => {
 }
 
 const mapStateToProps = (store) => {
-  const {contactModalValues} = store.generalState;
+  const {contactModalValues} = store.contactModalState;
   return {
     contactModalValues,
   }
 }
 
 const mapDispatchToProps = {
-  setContactModalOpened,
-  setShowLoader,
-  getContactsList
+  postUpdateContact,
+  postCreateContact
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactModalSubmitButton)

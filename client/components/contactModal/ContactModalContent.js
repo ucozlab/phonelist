@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 
 import {setContactModalOpened, setContactModalValue} from "../../actions/generalFunctions";
 import ContactModalSubmitButton from "./ContactModalSubmitButton";
+import {clearContactValues} from "../../reducers/contactModalReducer";
 
 const ContactModalContent = (props) => {
   const {contactModalValues, setContactModalValue, setContactModalOpened} = props;
@@ -30,8 +31,18 @@ const ContactModalContent = (props) => {
         </CardContent>
       </Card>
       <div className="modal-content">
-        <ui className="modal-content__list">
-          {["first_name", "last_name", "phone", "image", "countryCode", "email"].map(inputKey => {
+        <ul className="modal-content__list">
+          {Object.keys(clearContactValues).map(inputKey => {
+            if (inputKey === "_id" || inputKey === "image") {
+              return null
+            }
+            // if (inputKey === "image") {
+            //   return (
+            //     <li className="modal-content__list-item" key={inputKey}>
+            //       image input here soon...
+            //     </li>
+            //   )
+            // }
             return (
               <li className="modal-content__list-item" key={inputKey}>
                 <TextField name={inputKey}
@@ -42,7 +53,7 @@ const ContactModalContent = (props) => {
               </li>
             )
           })}
-        </ui>
+        </ul>
         <div className="modal-content__buttons">
           <Button variant="outlined" onClick={() => setContactModalOpened(false)}>Cancel</Button>
           <ContactModalSubmitButton/>
@@ -53,7 +64,7 @@ const ContactModalContent = (props) => {
 }
 
 const mapStateToProps = (store) => {
-  const {contactModalOpened, contactModalValues} = store.generalState;
+  const {contactModalOpened, contactModalValues} = store.contactModalState;
   return {
     contactModalOpened,
     contactModalValues,
