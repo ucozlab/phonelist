@@ -1,9 +1,11 @@
-  import React from 'react';
+import React from 'react';
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from "@mui/material/IconButton";
 import {postDeleteContact} from "../../actions/contactModalFunctions";
+import contactInterface from "../../interface/contactInterface";
 
 
 const ContactDeleteButton = (props) => {
@@ -19,6 +21,10 @@ const ContactDeleteButton = (props) => {
       <DeleteIcon />
     </IconButton>
   );
+}
+
+ContactDeleteButton.propTypes = {
+  contact: PropTypes.shape(contactInterface)
 }
 
 const mapDispatchToProps = {

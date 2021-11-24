@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -9,6 +10,7 @@ import ImageIcon from '@mui/icons-material/Image';
 
 import ContactEditButton from "./ContactEditButton";
 import ContactDeleteButton from "./ContactDeleteButton";
+import contactInterface from "../../interface/contactInterface";
 
 const Contact = (props) => {
   const {contact} = props;
@@ -32,6 +34,10 @@ const Contact = (props) => {
       <ListItemText primary={contact.first_name + " " + contact.last_name} secondary={contact.countryCode + " " + contact.phone} />
     </ListItem>
   );
+}
+
+Contact.propTypes = {
+  contact: PropTypes.shape(contactInterface)
 }
 
 export default connect()(Contact)

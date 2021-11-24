@@ -22,15 +22,9 @@ const AddContactButton = (props) => {
   );
 }
 
-const mapStateToProps = () => {
-  return {
-
-  }
-}
-
 const mapDispatchToProps = {
   setContactModalOpened,
   setActiveContact
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddContactButton)
+export default connect(null, mapDispatchToProps)(AddContactButton)

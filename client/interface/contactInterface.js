@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default {
+const contactInterface = {
   "_id": PropTypes.string,
   "first_name": PropTypes.string,
   "last_name": PropTypes.string,
@@ -9,3 +9,5 @@ export default {
   "countryCode": PropTypes.string,
   "email": PropTypes.string
 }
+
+export default contactInterface
